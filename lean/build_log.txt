@@ -1,0 +1,295 @@
+Lean のコンパイル記録（月絶天葬数・改訂61 の付録）
+日時: 2026-10-21 16:34:55 JST
+Lean: Lean (version 4.12.0, x86_64-unknown-linux-gnu, commit dc2533473114, Release)
+環境: Linux x86_64、メモリ 7 GB
+
+--- ソースの SHA-256 ---
+d24109cc65251894cd713417c71fe8843f7f2e31ff744e8374c3fccacabb75f2  Moon.lean
+bd7ce8b27fc9fb4a41ec193abd9676b18b1ec4af67d23bce5dd5a3773fb442ea  Export.lean
+ab79537dd584427ddbe63a335c16313cbc60023a44e11926698f60550cf2a6fd  OldPair.lean
+83b48967aa036a0448fd41cbf617777dbd960a35260f23581d470ba8d2aa0a9f  G5.lean
+8b181cb4809e5b44c5d6765c1224904529c5b5261b2d55364bc706b332a18577  G13.lean
+3c452d7a2e3dcf25a64abc000dd5dae32fd0b8ceecefe458d510edbb00e96920  G14.lean
+8c71d0d22687665f8eca7f5a84a61dbc37f0f9ae2f8dbc66f0271d002407bc54  G6.lean
+c569bd94c86a14e8cd0dae54ee1cf331d32cf966951be3c810b905bc6549662b  Tables.lean
+1a6e5eba38c8b2c58ef29f9bceedf8e51f9ef4c60ba5416065b13fadd35ce476  G7.lean
+636796ad1441ed548b7222eca9e44670eb7340cad746470062fcf744fe4ea28d  Dec.lean
+1942952da63bcef970db3618f9b018f012960ecd534f74906b69e9b72f3c0cf6  Encode.lean
+cf7c2a6930d8cb04829ba2287e9372c63ff9837b579e70a08aaa0ae31609cef3  TrCore.lean
+0f539ebbcaf769c3fb4b8548905822bdb22da7243a4af00295de5f58da8af67b  TrPartsA.lean
+35da243b19414a596bbf51d7dd5a8b7dfe26c3559907af21a2765d3b3974fb74  TrPartsB.lean
+02e06a096f418fd085aa76319e88182d33c2452e6dac739e5f74e87b2cfdf7c1  TrPartsC.lean
+be971148f1d717786a0d2eae7698abf7e9eb0c3a0457434e0cc77afc020c4634  TrPartsD.lean
+ddfcedb9f8fd37e229fcd08da6e8644d335224e3a95622f57cbee1a906ee53df  TrPartsE.lean
+30aa7f0509d84716ca4f3df8b465db9657ebcaa6d76d8833f2fb06c5ba31d23e  TrPartsF.lean
+a84e096c6a9d597bffdfd8543234593a9566946ce827509b0c89f19e0164b63c  TrPartsG.lean
+950c44a91d1f386a70fc7f59a01c1d727696f2a0727e88ae74d4a7c4f2050670  TrPartsH.lean
+40ce8d4d302b3198a730b2a80c05e2aac3b82ca4ca73b5676ca9d7aa53775621  TrPartsI.lean
+69834b880054c81c0e6a36cdcc90abe5107f3e72b8844c4e95cdecfa3646cb77  TrPartsJ.lean
+69615b8ef4c004d13eceb882c08b683d6d8f7bf8600eb570a29e2c941d695960  TrLitA.lean
+efb52df88314247bc31f1c0b000618244c677c1ee0711f7443058fe954b27a26  TrLitB.lean
+11307eb4d5e9198aef58f3b8fd54f9f5ba44872342c013561d0340a988ad5545  TrLitC.lean
+08f2eae93075a91c34dfa311eb78b00d84792e0f5f1100d6b43ed9e82cba614c  TrLitD.lean
+f5edd974a94865b4300752280814ea697c9cb6ea765c66ac5fb9a420d8921fea  TrLitE.lean
+b92cdf0028d8feeae49f0534866b698202ca534ce7dc5503dbaf48ef8c911e74  TrLitF.lean
+e45033023fbfe960773bb21094d1e007ec1d0d3549ec889a47b4016c0445d54e  TrLitG.lean
+8dc0ca0e0d22e12e0cb19923ee1da4367a90258637eaada4a19bb8713de64150  TrLitH.lean
+008e667f3ff47066b97ca4cf55a32e417131b15544b518d3815bd8bb2e896142  TrLitI.lean
+ec3730b22d0d446a1e16d3f37478c5457b559d4e232462a4e05f95180e4afef7  TrLitJ.lean
+4dd4c4d1fa5bac730775ec646c20f532e495d9ccb9db9083e1fe07affe3e971f  TrAttr.lean
+b55365c2adf9a217a9cdc3bb078f0d6e93ce4f5216d2e9f615e14ca72e9e775e  TrKer.lean
+42a718e66f2819849f6e1a9f67092e9a7d0a705b1d7ad353e9ff6bbde2b74da6  TrExp.lean
+32df85a7586f5302ce5a033b803f55f56c383a7cb8aa4f0f5d3bc1c9ec1d51f4  TrLem.lean
+915a46be5ec325d673dcb785e9ccddefec3c38e22f06bdb16356c9a551d5e252  TrRel.lean
+12173dece21283d2de902753b56ec28c940abff316162b8b5fdb397ff84c3fa0  TrRelD.lean
+8597105ce386da8db30422295f48c84df1073ad7cb7427bfe2e77c677f38909a  TrRelE.lean
+c7ffa11c6aab661c56fc46943721f62b9fd09d37b579fb11f06212500d81f71e  TrRelF.lean
+4bf80284ca172ee9e983124097f7974eb3535c03f3801f7cdf9012b371f6d31d  TrRelG.lean
+64e81e65f94f004b2ac56fd2944074b720728d42828cf8e9f1b454f3a83189ea  TrRelH.lean
+8f5685f5451a5476598c85cc723a77ca180b1ef061c0d4660561f9bd182de38f  TrRelI.lean
+965983301739ae2016882b6ff6f55fde429acf49d976170624e03d7cd598b767  TrRelJ.lean
+de1982128eadbdf0b901b305b62c3ac8ffb786623391492837f4d8c809598328  TrCheck.lean
+af156e2d4332e0babf4f669cf0e90625c44a37b2b37a82ccce6b011330128275  TrMeans.lean
+6750e80f84dd27e5a0ca922a63b0e5252eadf7022a2813d95aa33b9030173f31  TrNat.lean
+891774ced3569648b1b8f19693e45201c664eab8b1d8b3021f24e7f198f91e2e  TrSyn.lean
+e83660467ee20f7c81e4fc4c7105a7d835d3511003bd040b722ceee899cfb9b8  TrSem.lean
+8de0a19c2e73579af62f2db164f25e6b8becd7096d79f095577769067a1bb3e3  TrDef.lean
+400b84b76b198e9f2e29cd5e8e564593f1eea181aeb5326b040113b2803fddfb  TrL.lean
+fc46058b677e169f78b5d47622e1b410e657f814e5f043300ee6df839e957bd1  TrLO.lean
+8193bf2ac37a58284a84f29e798f9700da493fecc3623cef62747c6a90dcc48d  TrLO2.lean
+4fe1d5274468ff25a16b8506fc71822fb4b98d2808fac785b5da504db10882b4  TrLO3.lean
+e0017eda4e8ec6da81a19c420cc25859024e8be5ca4d243d83c38f1b26c142d0  TrTh.lean
+6e3d62f7243b415ef22806ad13d2b97700e8b7a7926dbb4ff612a2a30e2c86f3  TrU.lean
+6879d51acc60aac9dc2b419ad27f49271630f3fcae4bbc88c30e5ee1f0812750  TrUq1.lean
+88ddc8df5662571b4ee24b7823e268931c09c10e7d62daf187651479aa046941  TrUq2.lean
+0f87cbee2b3d25fe187baeec4c488e7e6e0f503d6d89236a2ad78893191e36ef  TrUq3.lean
+de6ba598d4d82dc7f67439328a15ef66cf5e07b20b9ede5d61483e6f2a7afb26  TrUq4.lean
+
+--- sorry / admit / axiom 宣言の検索（コメントを含む素朴な検索）---
+（該当なし）
+
+=== Moon.lean  開始 2026-10-21 16:34:56
+'Moon.absolute' depends on axioms: [propext]
+'Moon.absoluteF' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Moon.table_unique' depends on axioms: [Quot.sound]
+=== Moon.lean  終了コード 0、0 秒
+=== Export.lean  開始 2026-10-21 16:34:56
+=== Export.lean  終了コード 0、2 秒
+=== OldPair.lean  開始 2026-10-21 16:34:58
+OldPair.lean:6:1807: error: unsolved goals
+α : Type
+mem : α → α → Prop
+U : α → Prop
+trans : ∀ (x y : α), U y → mem x y → U x
+e : Nat → α
+x : α
+he : ∀ (n : Nat), U (e n)
+hx : ¬U x
+k1 : ∀ (n : Nat), ¬mem x (e n)
+k2 : ∀ (n : Nat), x ≠ e n
+⊢ (∃ x_1, (mem x_1 x → x_1 = e 1) → x_1 = e 1 ∧ ¬mem x_1 x) ∧
+    ∃ x_1, (mem x_1 x → ¬x_1 = e 1 → x_1 = e 2) → (¬x_1 = e 1 → x_1 = e 2) ∧ ¬mem x_1 x
+=== OldPair.lean  終了コード 1、1 秒
+=== G5.lean  開始 2026-10-21 16:34:59
+G5.lean:502:0: warning: automatically included section variable(s) unused in theorem 'G5.term_val':
+G5.lean:538:0: warning: automatically included section variable(s) unused in theorem 'G5.terms_val':
+'G5.sat_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== G5.lean  終了コード 0、10 秒
+=== G13.lean  開始 2026-10-21 16:35:09
+G13.lean:159:0: warning: automatically included section variable(s) unused in theorem 'G13.def_cmp':
+G13.lean:180:0: warning: automatically included section variable(s) unused in theorem 'G13.newLess_iff_min':
+G13.lean:199:0: warning: automatically included section variable(s) unused in theorem 'G13.newLess_irrefl':
+'G13.succ_wf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'G13.union_wf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'G13.newLess_iff_min' depends on axioms: [propext, Classical.choice, Quot.sound]
+'G13.lexN_wf' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== G13.lean  終了コード 0、1 秒
+=== G14.lean  開始 2026-10-21 16:35:10
+'G5.theta_henkin' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== G14.lean  終了コード 0、1 秒
+=== G6.lean  開始 2026-10-21 16:35:11
+'G5.subst_lemma' depends on axioms: [propext, Quot.sound]
+'G5.isDef_iff' depends on axioms: [propext, Quot.sound]
+'G5.definable_unique' depends on axioms: [propext, Quot.sound]
+=== G6.lean  終了コード 0、1 秒
+=== Tables.lean  開始 2026-10-21 16:35:12
+'Tables.hyper_correct' depends on axioms: [propext, Quot.sound]
+'Tables.H_three' depends on axioms: [propext, Quot.sound]
+'Tables.sum_indep' depends on axioms: [propext, Quot.sound]
+'Tables.iter_correct' depends on axioms: [propext, Quot.sound]
+'Tables.numeral_A' depends on axioms: [propext, Quot.sound]
+=== Tables.lean  終了コード 0、2 秒
+=== G7.lean  開始 2026-10-21 16:35:14
+'G7.cnf_cmp_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'G7.name_lt_wf' depends on axioms: [propext, Classical.choice]
+=== G7.lean  終了コード 0、2 秒
+=== Dec.lean  開始 2026-10-21 16:35:16
+'Dec.cnf_cmp_correct_py' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Dec.name_lt_wf_py' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== Dec.lean  終了コード 0、1 秒
+=== Encode.lean  開始 2026-10-21 16:35:17
+'Enc.nth_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Enc.encode_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Enc.enc_inj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Enc.metacode_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Enc.metacode_inj' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== Encode.lean  終了コード 0、2 秒
+=== TrCore.lean  開始 2026-10-21 16:35:19
+=== TrCore.lean  終了コード 0、3 秒
+=== TrPartsA.lean  開始 2026-10-21 16:35:22
+=== TrPartsA.lean  終了コード 0、2 秒
+=== TrPartsB.lean  開始 2026-10-21 16:35:24
+=== TrPartsB.lean  終了コード 0、3 秒
+=== TrPartsC.lean  開始 2026-10-21 16:35:27
+=== TrPartsC.lean  終了コード 0、3 秒
+=== TrPartsD.lean  開始 2026-10-21 16:35:30
+=== TrPartsD.lean  終了コード 0、1 秒
+=== TrPartsE.lean  開始 2026-10-21 16:35:31
+=== TrPartsE.lean  終了コード 0、2 秒
+=== TrPartsF.lean  開始 2026-10-21 16:35:33
+=== TrPartsF.lean  終了コード 0、1 秒
+=== TrPartsG.lean  開始 2026-10-21 16:35:34
+=== TrPartsG.lean  終了コード 0、2 秒
+=== TrPartsH.lean  開始 2026-10-21 16:35:36
+=== TrPartsH.lean  終了コード 0、1 秒
+=== TrPartsI.lean  開始 2026-10-21 16:35:37
+=== TrPartsI.lean  終了コード 0、6 秒
+=== TrPartsJ.lean  開始 2026-10-21 16:35:43
+=== TrPartsJ.lean  終了コード 0、1 秒
+=== TrLitA.lean  開始 2026-10-21 16:35:44
+=== TrLitA.lean  終了コード 0、640 秒
+=== TrLitC.lean  開始 2026-10-21 16:46:24
+=== TrLitC.lean  終了コード 0、1 秒
+=== TrLitD.lean  開始 2026-10-21 16:46:25
+=== TrLitD.lean  終了コード 0、0 秒
+=== TrLitE.lean  開始 2026-10-21 16:46:25
+=== TrLitE.lean  終了コード 0、0 秒
+=== TrLitF.lean  開始 2026-10-21 16:46:25
+=== TrLitF.lean  終了コード 0、0 秒
+=== TrLitG.lean  開始 2026-10-21 16:46:25
+=== TrLitG.lean  終了コード 0、0 秒
+=== TrLitH.lean  開始 2026-10-21 16:46:25
+=== TrLitH.lean  終了コード 0、0 秒
+=== TrLitI.lean  開始 2026-10-21 16:46:25
+=== TrLitI.lean  終了コード 0、1 秒
+=== TrLitJ.lean  開始 2026-10-21 16:46:26
+=== TrLitJ.lean  終了コード 0、0 秒
+=== TrAttr.lean  開始 2026-10-21 16:46:26
+=== TrAttr.lean  終了コード 0、1 秒
+=== TrKer.lean  開始 2026-10-21 16:46:27
+=== TrKer.lean  終了コード 0、0 秒
+=== TrExp.lean  開始 2026-10-21 16:46:27
+=== TrExp.lean  終了コード 0、2 秒
+=== TrLem.lean  開始 2026-10-21 16:46:29
+=== TrLem.lean  終了コード 0、3 秒
+=== TrRel.lean  開始 2026-10-21 16:46:32
+=== TrRel.lean  終了コード 0、104 秒
+=== TrRelD.lean  開始 2026-10-21 16:48:16
+=== TrRelD.lean  終了コード 0、9 秒
+=== TrRelE.lean  開始 2026-10-21 16:48:25
+=== TrRelE.lean  終了コード 0、20 秒
+=== TrRelF.lean  開始 2026-10-21 16:48:45
+=== TrRelF.lean  終了コード 0、17 秒
+=== TrRelG.lean  開始 2026-10-21 16:49:02
+=== TrRelG.lean  終了コード 0、60 秒
+=== TrRelH.lean  開始 2026-10-21 16:50:02
+=== TrRelH.lean  終了コード 0、6 秒
+=== TrRelI.lean  開始 2026-10-21 16:50:08
+=== TrRelI.lean  終了コード 0、50 秒
+=== TrRelJ.lean  開始 2026-10-21 16:50:58
+=== TrRelJ.lean  終了コード 0、10 秒
+=== TrLitB.lean  開始 2026-10-21 16:35:44
+=== TrLitB.lean  終了コード 0、1736 秒
+=== TrCheck.lean  開始 2026-10-21 17:04:40
+=== TrCheck.lean  終了コード 0、6 秒
+=== TrMeans.lean  開始 2026-10-21 17:04:46
+=== TrMeans.lean  終了コード 0、130 秒
+=== TrNat.lean  開始 2026-10-21 17:06:56
+'Tr.Model.lit_encode_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lit_metacode_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lit_metacode_inj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lit_hyper_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lit_nth_prime_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrNat.lean  終了コード 0、6 秒
+=== TrSyn.lean  開始 2026-10-21 17:07:02
+'Tr.Model.lit_formula_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lit_formula_minus_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrSyn.lean  終了コード 0、28 秒
+=== TrSem.lean  開始 2026-10-21 17:07:30
+TrSem.lean:457:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.listClause_iff':
+'Tr.Model.sat_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.full_sat_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.full_sat_ext_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrSem.lean  終了コード 0、12 秒
+=== TrDef.lean  開始 2026-10-21 17:07:42
+'Tr.Model.definableIn_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.full_definable_in_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrDef.lean  終了コード 0、2 秒
+=== TrL.lean  開始 2026-10-21 17:07:44
+'Tr.Model.defines_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.full_defines_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrL.lean  終了コード 0、3 秒
+=== TrLO.lean  開始 2026-10-21 17:07:47
+'Tr.Model.step_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.step_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lorder_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrLO.lean  終了コード 0、1 秒
+=== TrLO2.lean  開始 2026-10-21 17:07:48
+TrLO2.lean:324:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.hasDef':
+'Tr.Model.step_succLt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.step_wo' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrLO2.lean  終了コード 0、3 秒
+=== TrLO3.lean  開始 2026-10-21 17:07:51
+TrLO3.lean:134:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.look_H':
+TrLO3.lean:140:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.step_good':
+'Tr.Model.self_def' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lorder_wo' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrLO3.lean  終了コード 0、4 秒
+=== TrTh.lean  開始 2026-10-21 17:07:55
+'Tr.Model.goodS_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.leastGood_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.leastGood_exists_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.thetaL_henkin' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrTh.lean  終了コード 0、2 秒
+=== TrU.lean  開始 2026-10-21 17:07:57
+'Tr.Model.rep5_struct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.theta_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.struct_henkin' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrU.lean  終了コード 0、3 秒
+=== TrUq1.lean  開始 2026-10-21 17:08:00
+'Tr.Model.omega_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.cnfLt_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.ordOf_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lamOf_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.vstage_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrUq1.lean  終了コード 0、3 秒
+=== TrUq2.lean  開始 2026-10-21 17:08:03
+'Tr.Model.fn_agree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.theta_agree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.structRec_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.structFull_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrUq2.lean  終了コード 0、3 秒
+=== TrUq3.lean  開始 2026-10-21 17:08:06
+'Tr.Model.finiteSum_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.fval_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.iterate10_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.lngn_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.full_lngn_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrUq3.lean  終了コード 0、3 秒
+=== TrUq4.lean  開始 2026-10-21 17:08:09
+TrUq4.lean:137:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.vs_l1tr':
+TrUq4.lean:142:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.vs_val':
+TrUq4.lean:176:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.vs_memD':
+TrUq4.lean:364:0: warning: automatically included section variable(s) unused in theorem 'Tr.Model.level_sub':
+'Tr.Model.inacc_lim' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.vs_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.struct_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Tr.Model.full_lngn_unique'' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== TrUq4.lean  終了コード 0、4 秒
+
+--- まとめ ---
+注：OldPair.lean は、改訂28 以前の旧版の順序対の式（pair_old）で同じ絶対性の構成を試し、証明が通らないことを確かめるためのファイル（lean_export.py --old が書き出す）。終了コード 1 は意図どおり。旧版が実際に絶対的でないことの反例は test_pair.py にある。
+コンパイルしたファイル: 60 個
+終了コードが 0 でないファイル: OldPair.lean 
+error を含む行の数: 1
+完了 2026-10-21 17:08:13
