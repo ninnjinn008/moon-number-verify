@@ -1,0 +1,67 @@
+\section{月絶天葬数の定義}\label{sec:def}
+
+\subsection{言語と記号数}
+基本記号のアルファベットを $\Sigma=\{\,x,\ {}',\ \neg,\ \wedge,\ \forall,\ \in,\ =,\ (,\ )\,\}$ とする．
+変数は $x$ のあとに有限個のプライムを並べた語 $x, x', x'', \dots$ である．
+\emph{$\Lang$-式}は次の規則で生成されるものに限る．
+\[ \varphi ::= (u\in v) \mid (u=v) \mid \neg\varphi \mid (\varphi\wedge\psi) \mid \forall u\,\varphi \]
+$\exists,\vee,\to,\leftrightarrow$ は略記で，記号数は展開後の式について数える．
+式 $\varphi$ の\emph{記号数} $|\varphi|$ は，変数を構成する $x$ とプライムを含め，基本記号を一つずつ数えた総数である．
+
+\subsection{一意定義可能性と関数 $F$}
+\begin{definition}
+自然数 $n$ が\emph{$k$ 記号未満の式で $\M$ において一意に定まる}とは，自由変数がちょうど $x$ である $\Lang$-式 $\varphi(x)$ で
+\[ |\varphi|<k,\qquad \M\models\exists!x\,\varphi(x),\qquad \M\models\varphi[n] \]
+を満たすものが存在することをいう．充足関係は，$\M$ が集合であることを用いて $L$ の中で Tarski の再帰で定める．数 $n$ は対象言語の項として書かず，割当て $x\mapsto n$ で指定する．
+\end{definition}
+
+\begin{definition}
+$D_k=\{\,n\in\omega : n$ は $k$ 記号未満の式で $\M$ において一意に定まる$\}$ とし，
+\[ F(k) = \begin{cases} 1+\max D_k & (D_k\neq\emptyset)\\ 1 & (D_k=\emptyset)\end{cases} \]
+と定める．
+\end{definition}
+
+\begin{proposition}
+$F$ は全域で，広義単調増加である．
+\end{proposition}
+\begin{proof}
+長さ $k$ 未満の語は有限個しかなく，各式が一意に定める自然数は高々一つなので，$D_k$ は有限である．また $D_k\subseteq D_{k+1}$ である．
+\end{proof}
+
+Mahlo 基数の存在と $V{=}L$ は，$F$ の全域性のためではなく，評価構造 $\M$ を固定するために用いる．
+
+\subsection{補題：$y\ge 10^{100}$ で $F(y)>y$}
+$y$ そのものを名指す必要はなく，$y$ 以上の数を短く名指せば足りる．そのために $|V_j|$ を用いる．
+
+\begin{definition}
+次の部品から式 $\Bg_j(x)$ を組み立てる（$\exists,\vee,\to,\leftrightarrow$ は展開する）．
+\begin{itemize}
+\item $\mathrm{Empty}(a):\ \forall e\,\neg(e\in a)$．$\mathrm{Trans}(a):\ \forall z\,(z\in a\to\forall u\,(u\in z\to u\in a))$．
+\item $\mathrm{Succ}(z):\ \exists w\,(w\in z\wedge\forall u\,(u\in z\leftrightarrow(u\in w\vee u=w)))$．
+\item $\mathrm{Nat}(a)$：$\mathrm{Trans}(a)$，$a$ の元も推移的，$a$ 以下の各元が $\mathrm{Empty}$ か $\mathrm{Succ}$．
+\item $\mathrm{PowerOf}(a,b):\ \forall z\,(z\in a\leftrightarrow\forall u\,(u\in z\to u\in b))$．
+\item $\mathrm{Chain}_0(v)=\mathrm{Empty}(v)$，$\mathrm{Chain}_{j+1}(v)=\exists w\,(\mathrm{PowerOf}(v,w)\wedge\mathrm{Chain}_j(w))$（$v,w$ には $x'$ と $x''$ を交互に使う）．
+\item $\mathrm{Equi}(a,b)$：$a$ と $b$ の間の全単射が存在する．
+\end{itemize}
+$\Bg_j(x)\equiv \mathrm{Nat}(x)\wedge\exists v\,(\mathrm{Chain}_j(v)\wedge\mathrm{Equi}(x,v))$．
+\end{definition}
+
+\begin{lemma}\label{lem:big}
+$\M\models\Bg_j[x]$ となる $x$ は $|V_j|$ だけである．また $|\Bg_j|\le 6659+114j$ で，$|\Bg_6|=7334$．
+\end{lemma}
+\begin{proof}
+$\M$ は推移的で基礎の公理を満たす．推移的でその元も推移的な集合は順序数であり，$x$ 以下の順序数がすべて $0$ か後者なら $x$ は自然数である．$V_j$ は遺伝的有限で，その部分集合はすべて $\M$ に属するので，$\M$ の中の $\mathrm{PowerOf}$ は真の冪集合を与え，$\mathrm{Chain}_j(v)$ を満たす $v$ は $V_j$ だけである．$x$ と $V_j$ はともに有限なので，その間の全単射は $\M$ に属する．記号数はプログラム（\ref{app:repro}）で数えた．文字列の長さと構文木の再帰計算の二通りで数え，一致を確かめている．
+\end{proof}
+
+\begin{proposition}\label{prop:Fgrow}
+$y\ge 10^{100}$ なら $F(y)>y$．
+\end{proposition}
+\begin{proof}
+$|V_j|\ge y$ となる最小の $j$ をとる．$|V_5|=65536<y$ より $j\ge 6$．$j=6$ なら $|\Bg_6|=7334<y$．$j\ge 7$ なら $y>|V_{j-1}|$ である．$k\ge 6$ で $|V_k|\ge 2^{k+40}$ なので，$y>2^{j+39}$．一方 $|\Bg_j|\le 6659+114j<2^{13}(1+j)\le 2^{j+13}<2^{j+39}$．よって $|V_j|\in D_y$ かつ $|V_j|\ge y$ で，$F(y)\ge 1+|V_j|>y$．
+\end{proof}
+
+\subsection{月絶天葬数}
+\begin{definition}
+$N = F^{F(10^{100})}(10^{100})$．ここで $F^0(x)=x$，$F^{m+1}(x)=F(F^m(x))$ である．
+\end{definition}
+命題 \ref{prop:Fgrow} より，反復の各段の値は $10^{100}$ 以上で，$F$ は各段で真に増加する．$F(10^{100})\ge 2$ なので $F(10^{100})<N$ である．

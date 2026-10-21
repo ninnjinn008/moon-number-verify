@@ -1,0 +1,30 @@
+\section{準備：評価モデル}\label{sec:prelim}
+
+\subsection{記法}
+$V_\alpha$ は累積階層，$\rank(x)$ は階数で，$\rank(x)<\mu\iff x\in V_\mu$．
+自然数はフォン・ノイマン自然数とし，$0=\emptyset$，$n+1=n\cup\{n\}$．
+順序対は $(a,b)=\{\{a\},\{a,b\}\}$ とする．
+\emph{1-到達不能基数}とは，到達不能基数であって，その下に到達不能基数が非有界に存在するものをいう．
+
+\subsection{評価モデルの固定}
+
+\begin{proposition}\label{prop:mahloL}
+$V$ の Mahlo 基数 $\mu$ は $L$ でも Mahlo 基数である．
+\end{proposition}
+\begin{proof}
+$V$ で正則な基数は $L$ でも正則である．$\mu$ は $V$ で極限基数で，$V$ の基数は $L$ でも基数なので，$\mu$ は $L$ でも極限基数である．$L$ では GCH が成り立つので，$\mu$ 未満の $L$ の基数 $\lambda$ について $(2^\lambda)^L=(\lambda^+)^L<\mu$ となり，$\mu$ は $L$ で強極限である．よって $\mu$ は $L$ で到達不能である．
+$\mu$ 未満の $V$ の到達不能基数 $\nu$ は，同じ理由で $L$ でも到達不能である．$L$ に属する $\mu$ の閉非有界集合は $V$ でも閉非有界であり，$\mu$ は $V$ で Mahlo なので，$V$ の到達不能基数の集合はそれと交わる．したがって $L$ の到達不能基数の集合は，$L$ のどの閉非有界集合とも交わり，$L$ で定常である．
+\end{proof}
+
+したがって，$V$ に Mahlo 基数が存在すれば $L\models\Sth$ である．ここで
+\[ \Sth = \ZFC + V{=}L + \text{「Mahlo 基数が存在する」}. \]
+以後，すべての定義と評価は $L$ の中で行う．
+
+\begin{definition}
+$\kappa$ を $L$ における最小の Mahlo 基数とし，
+\[ \M = (V_{\kappa+1},\in) \quad (L \text{ の中で計算する}) \]
+とおく．$V{=}L$ の下で $V_\kappa=L_\kappa$ である．
+\end{definition}
+
+$\omega$ は $L$ と $V$ で一致するので，以下で定まる自然数は $V$ の自然数としても同じものである．
+本稿の主張は「$L$ で評価する」という意味論上の取り決めの下でのものである．これは，Rayo の数が真の宇宙 $V$ を基準とするのと同じ種類の取り決めである．

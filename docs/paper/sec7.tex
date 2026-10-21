@@ -1,0 +1,44 @@
+\section{機械検証}\label{sec:verify}
+
+\subsection{Lean による形式化の構成}
+Lean 4（版 4.12.0，標準ライブラリのみ，Mathlib なし）\cite{lean} で 60 個のファイルを書き，カーネルで検査した．
+\begin{itemize}
+\item \textbf{抽象的な補題．}原理 A〜C と基本部品の絶対性（\file{Moon}，\file{Export}），充足関係（\file{G5}），定義可能性（\file{G6}），$L$ の段階の順序（\file{G13}），$\Theta$ と Henkin 公理（\file{G14}），CNF（\file{G7}，\file{Dec}），Encode と MetaCode（\file{Encode}）．
+\item \textbf{書き写しの検証．}Python の生成プログラムの 117 部品を Lean の構文木として書き出し（\file{TrParts*}，\file{TrLit*}），各部品の意味が意図した条件と一致することを証明した（\file{TrRel*}，\file{TrMeans}）．展開の条件はカーネルの計算（\code{Eq.refl}）で検査する．
+\item \textbf{意味への接続．}集合の言葉の条件から自然数の値（\file{TrNat}），構文（\file{TrSyn}），Tarski の充足（\file{TrSem}），定義可能性（\file{TrDef}，\file{TrL}），$L_\lambda$ と $<_\lambda$ の一意性と整列性（\file{TrLO*}），$\Theta$（\file{TrTh}），構造の表現（\file{TrU}）．
+\item \textbf{一意性．}\file{TrUq1}〜\file{TrUq4}（\S\ref{sec:uniq}）．
+\end{itemize}
+\file{OldPair.lean} は，旧版の順序対で同じ証明が通らないことを示すためのファイルで，コンパイルが失敗するのが正しい．
+
+\subsection{Lean の定理を読む宇宙}\label{sec:readL}
+Lean の定理は「任意の型 $\alpha$ とその上の構造について」の形をしている．本稿はこれを $L$ の中で読み，$\alpha=\M$，$H=V_\kappa$ とする．
+$L$ は $\ZFC$ のモデルで，$\kappa$ は $L$ で到達不能なので，$V_\kappa$ は任意の述語・関数について $\mathrm{Zax}$ を満たす．
+$L$ には定義可能な大域的整列順序があるので，\code{Classical.choice} の解釈にも困らない．
+この読み替え（Lean の論理の集合論的解釈）はメタな議論で，機械では検査していない．
+なお，外側の $V$ で読むと，$V\neq L$ のとき分出・置換が成り立たない．たとえば $L$ に属さない実数 $r\subseteq\omega$ について，$\{n\in\omega:n\in r\}$ は $(V_\kappa)^L$ に属さない．
+
+\subsection{最終式の照合}
+\paragraph{ハッシュ値の照合．}$\varphi$ は木として展開すると約 192 億記号になる．
+そこで，各節点のハッシュ値を節点の種類と子のハッシュ値から SHA-256 で作る Merkle 木の方式で，生成プログラムの出力と Lean で組み立てた式を比べた（\file{tr\_hash\_check.py}）．
+結果は一致した．部品を一か所変えた変異版では不一致を検出した．
+
+\paragraph{全文の独立な構文検査．}生成プログラムを使わず，第 3 節の文法だけから C で構文検査器を書いた（\file{phi\_syntax\_check.c}）．
+$\varphi$ の全文を名前付きパイプで受け取り，一文字ずつ検査した．結果は次のとおりである．
+\begin{itemize}
+\item 全文はちょうど一つの $\Lang$-式である．
+\item 記号数は $19{,}229{,}718{,}256$，自由変数は $\{x\}$ である．
+\item 入れ子の最大の深さは 596，変数のプライムの最大個数は 44{,}481，全文は $57{,}684{,}403{,}816$ バイトである．
+\end{itemize}
+
+\subsection{独立の環境での再現}
+付録一式を公開リポジトリ \cite{repo} に置いた．GitHub Actions が，GitHub の実行環境で次の二つを実行する．
+\begin{itemize}
+\item Lean 4.12.0 を新たに入れ，60 ファイルを順にコンパイルする．
+\item ハッシュ照合と全文の構文検査を行う．
+\end{itemize}
+2026 年 10 月 21 日の実行（番号 39590487970）で，両方とも成功した．所要時間は Lean が 23 分，式の検査が 3 分である．
+
+\subsection{検証の範囲}
+機械で検査したのは，書き写し・意味・一意性と，最終式の構文・ハッシュの一致である．
+存在の証明（\S\ref{sec:exist}）と，Lean を $L$ で読むこと（\S\ref{sec:readL}）は，人が読んで確かめる数学の証明である．
+有限の総当たりと変異テスト（\ref{app:repro}）は，部品の書き間違いを見つけるための検査で，一般の構造での正しさの証明ではない．

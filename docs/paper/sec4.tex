@@ -1,0 +1,94 @@
+\section{巨大数庭園数の定式化}\label{sec:lngn}
+
+\subsection{原文の要約}
+$\LNGN$ \cite{lngn} の理論は，$\in$ と一項関数記号 $U$ をもつ言語 $L$ 上の $T=\ZF_L\cup\{U1,U2,U3\}$ である．
+各 $U(\alpha)$ は，内部の言語 $\Lq$ の構造である．$\Lq$ は $\cq{\in}$，関数記号 $\cq{U}$ と $\cq{\Theta}$，追加の定数・関数・関係記号 $\cq{c_i},\cq{f_{a,i}},\cq{r_{a,i}}$ をもつ．
+\begin{itemize}
+\item $U1$：任意の順序数 $\alpha$ について，$U(\alpha)\models\overline{\ZFC}_{\Lq}$．この理論は Henkin 公理 $\mathrm{Henkin}_{i,P}$ を含む．$P$ は $\Theta$ を含まない $\Lq$-式（Formula$_-$）で，公理の内容は「$P$ を満たす $x_i$ があれば $x_i:=\Theta(\mathrm{MetaCode}(P))$ でも $P$ が成り立つ」である．
+\item $U2$：$\beta\in\alpha$ なら $\cq{U}^{U(\alpha)}(\beta)=U(\beta)$．
+\item $U3$：ある $\beta$ について $|U(\alpha)|=V_\beta$ で，$\cq{\in}^{U(\alpha)}$ は $\in$ と一致する．
+\end{itemize}
+記号は $\omega^4$ 未満の順序数で符号化される（\ref{app:code}）．$\mathrm{MetaCode}(P)$ は記号の符号の列を $\mathrm{Encode}$ で自然数にしたもので，$\mathrm{CNF}:\omega\to\varepsilon_0$ はカントール標準形による全射である．
+関数 $f$ と $\LNGN$ は次のように定められる．
+\begin{itemize}
+\item $\mathrm{IsDefinition}(P)$：$\exists x_0\,(P\wedge\forall x_1\,(P[x_1/x_0]\to x_1=x_0))$．
+\item $\mathrm{Definable}(m,i,P)$：$i\in\omega$，$P$ は $\Lq$-式，$U(\CNF(i))\models\mathrm{IsDefinition}(P)$ かつ $U(\CNF(i))\models P[\mathrm{Parameter}(m)/x_0]$．
+\item $f(n)=\sum\{\,m\in\omega : \exists i\in n\ \exists P\,(\mathrm{MetaCode}(P)\in n\wedge\mathrm{Definable}(m,i,P))\,\}$．
+\item $\LNGN = f^{10}(10\uparrow^{10}10)$．
+\end{itemize}
+
+\subsection{well-definedness と修復}
+
+\begin{proposition}[Henkin 公理と自由変数]\label{prop:henkin}
+「構造が式を満たす」をすべての割当てで成り立つと読むと，$\overline{\ZFC}_{\Lq}$ はモデルをもたず，$U1$ により $T$ は矛盾する．
+\end{proposition}
+\begin{proof}
+$i=1$，$P\equiv(\cq{x_1}\,\cq{\in}\,\cq{x_2})$ とする．$x_2$ に相異なる一元集合 $\{a\},\{b\}$ を割り当てると，$\mathrm{Henkin}_{1,P}$ は $\Theta(\mathrm{MetaCode}(P))=a$ と $=b$ を同時に要求する．
+\end{proof}
+
+この反例は $\Theta$ を含まないので，Formula$_-$ への制限の下でも成り立つ．そこで本稿は次の修復を採る．
+\begin{convention}\label{conv:reading}
+$\models$ は全称閉包で読む．Henkin 公理の対象は，自由変数が $\cq{x_i}$ だけの Formula$_-$ の式に限る（読み 1）．こうして修復した理論を $\T$ と書く．
+\end{convention}
+
+\begin{proposition}[Definable の一意性]
+規約 \ref{conv:reading} の下で，同じ $i,P$ について $\mathrm{Definable}(m,i,P)$ を満たす $m$ は高々一つである．したがって $f(n)$ は有限和で，$f$ は well-defined である．
+\end{proposition}
+\begin{proof}
+$U=U(\CNF(i))$ とし，$x_0,x_1$ 以外の自由変数への割当て $\tau$ を固定する．
+全称閉包により，$P[\mathrm{Parameter}(m)/x_0]$ は $x_1$ への任意の値 $b$ と $\tau$ の下で真である．$b=m$ とすれば $P(x_0{=}m,x_1{=}m)$ が真である．
+$\mathrm{IsDefinition}(P)$ の証人を $a$ とする．内側の $\forall x_1$ で $x_1=m$ とおくと，$P[x_1/x_0]$ は（原文の代入規則で束縛変数は付け替えられるので）$P(x_0{=}m,x_1{=}m)$ と同じ真理値をもち，真である．よって $m=a$ である．同様に $m'=a$ となる．
+\end{proof}
+
+「ある割当てで成り立つ」と読むと，$P\equiv(x_0=x_2)$ によりすべての $m$ が Definable になり，$f$ は定まらない．
+
+\begin{proposition}[解釈全体にわたる非有界性]\label{prop:unbounded}
+$\kappa$ が $L$ で Mahlo なら，$A=10\uparrow^{10}10$ 以上の任意の自然数 $m$ について，$\T$ のモデル $(V_\kappa,\in,U_{I_m})$ で $\LNGN_{I_m}\ge m$ となるものがある．
+\end{proposition}
+\begin{proof}
+解釈 $I_m$ を，\S\ref{sec:candidate} の候補解釈 $I$ と同じ超限再帰で作る．違いは一点だけで，各 $U(\alpha)$ で追加の定数記号 $\cq{c_0}$ を $m$ と解釈する．$m\in V_\omega\subseteq V_{\lambda_\alpha}$ なので，これは構造である．
+
+再帰をやり直すのは，次の二つのためである．
+\begin{itemize}
+\item $\Theta$ は再計算する．$\cq{c_0}$ を含む Formula$_-$ の式があるので，各段の $\Theta(m')$ は，$\cq{c_0}\mapsto m$ とした構造で good な元のうち $<_L$ で最小のものとして取り直す．たとえば $P(x_0)\equiv(x_0\,\cq{=}\,\cq{c_0})$ では $\Theta(\mathrm{MetaCode}(P))=m$ となり，Henkin 公理はこの $P$ についても成り立つ．$\cq{c_0}$ の解釈を変えて $\Theta$ を元のままにすると，Henkin 公理が破れる．
+\item $\cq{U}$ の値も作り直す．$\cq{U}^{U(\alpha)}(\beta)$ は，新しい再帰で作った $U(\beta)$ そのものである．
+\end{itemize}
+命題 \ref{prop:model} の証明は，追加の定数記号の解釈に依存しない．$U1$ の $\ZFC$ の図式は記号の解釈によらずに成り立ち，Henkin 公理は各段の $\Theta$ の作り方から従い，$U2$・$U3$ は再帰の定義から従う．したがって，$(V_\kappa,\in,U_{I_m})\models\T$ である．
+
+$P(x_0)\equiv(x_0\,\cq{=}\,\cq{c_0})$ は，$U(0)=U(\CNF(0))$ で $\mathrm{IsDefinition}(P)$ を満たし，$m$ を定義する．よって $\mathrm{Definable}(m,0,P)$ である．
+$\mathrm{MetaCode}(P)\le 10^{10^{23.82}}$ は $A$ よりはるかに小さい．したがって，$n>\mathrm{MetaCode}(P)$ を満たす $n$ について，$f(n)$ の和に $m$ が含まれ，$f(n)\ge m$ となる．
+$f^0(A)=A>\mathrm{MetaCode}(P)$ から始めると，各段で $f^{j+1}(A)\ge m\ge A>\mathrm{MetaCode}(P)$ となる．よって $\LNGN_{I_m}=f^{10}(A)\ge m$ である．
+\end{proof}
+
+したがって $\LNGN$ を単一の自然数として扱うには，解釈を固定する必要がある．解釈 $I$ の下での値を $\LNGN_I$ と書く．
+
+\subsection{候補解釈 $I$}\label{sec:candidate}
+\begin{definition}[候補解釈]\label{def:I}
+$\lambda_\alpha$ を $\alpha$ 番目の到達不能基数とする．構造 $U(\alpha)$ を次で定める．
+\begin{itemize}
+\item 領域 $D=V_{\lambda_\alpha}$，$\cq{\in}$ の解釈 $E=\in\restriction D$．
+\item 追加の定数記号は $\emptyset$，関数記号 $\cq{f_{a,i}}$ は値がつねに $\emptyset$，関係記号は空．
+\item $\cq{U}(x)$ は，$x$ が順序数で $x\in\alpha$ なら構造 $U(x)$ そのもの，それ以外は $\emptyset$．
+\item $\Theta(m)$ は，$m$ が Formula$_-$ の式 $P$ の番号なら，$P$ について \emph{good} な元のうち $<_L$ で最小のもの．good の定義は次のとおり．$P$ のどの変数 $x_i$ についても，「$P$ の真偽が $x_i$ の値だけで決まり，$P$ を満たす割当てがある」ならば，すべての割当て $\sigma$ で $\sigma[i:=a]\models P$ となる元 $a$．$m$ が番号でなければ $\Theta(m)=\emptyset$．
+\end{itemize}
+構造は五つ組 $((D,E),(Cn,(Fn,Rel)))$ で表す（構造の符号）．
+\end{definition}
+$V{=}L$ の下で $V_{\lambda_\alpha}=L_{\lambda_\alpha}$ であり，$<_L$ はその上の定義可能な整列順序である（\S\ref{sec:proofG} で具体化する）．
+読み 1 の Henkin 公理の対象 $P$ は真偽が $x_i$ だけで決まるので，$P$ が定数でなければ $\Theta(\mathrm{MetaCode}(P))$ は $P$ を満たす．
+$P$ は $\Theta$ を含まないので，$\Theta$ の定義は循環しない．
+
+\begin{proposition}[候補解釈が $\T$ のモデルであること]\label{prop:model}
+$\kappa$ が $L$ で Mahlo なら，$U_I$ を $\alpha<\kappa$ について上で定め，順序数でない引数では $\emptyset$ とするとき，$(V_\kappa,\in,U_I)\models\T$．
+\end{proposition}
+\begin{proof}[証明の概略]
+$\ZF_L$ の個々の公理は，$\kappa$ の到達不能性と $V_\kappa$ の推移性から従う．
+分出図式は，$A\in V_\kappa$ の部分集合が $V_\kappa$ に属することから従う．置換図式は $\kappa$ の正則性から従う．
+$U1$ について：$\lambda_\alpha$ は到達不能なので，$V_{\lambda_\alpha}$ は追加記号をどう解釈しても $\ZFC$ の図式を満たす．Henkin 公理（読み 1）は上の注意による．
+$U2$ は定義そのものである．$U(\beta)$ の階数は $\lambda_\beta+7$ 以下（\S\ref{sec:exist}）なので，$U(\beta)\in V_{\lambda_\alpha}$ となる．
+$U3$ は $\beta=\lambda_\alpha$ である．
+$\kappa$ は Mahlo なので，到達不能基数は $\kappa$ の下で定常で，順序型 $\kappa$ に並ぶ．よってすべての $\alpha<\kappa$ について $U(\alpha)$ が定まる．
+\end{proof}
+
+\begin{remark}[局所性]
+$f$ は $\CNF(i)<\varepsilon_0$ の $U(\CNF(i))$ しか参照しない．$U2$ によって参照される $U(\beta)$ も $\beta<\varepsilon_0$ である．よって $\LNGN_I$ の値は $V_{\lambda_{\varepsilon_0}+1}$ だけで決まり，外側の宇宙の取り方に依存しない．
+\end{remark}

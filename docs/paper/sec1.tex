@@ -1,0 +1,43 @@
+\section{序論}
+
+\subsection{背景}
+Rayo の数 \cite{rayo} は，集合論の言語の式による自然数の定義可能性を用いて巨大数を定める．
+すなわち，$k$ 記号未満の式で一意に定義できる自然数の最大値に $1$ を足す関数を考え，それに大きな引数を与える．
+この種の定義では，「定義可能」を評価する構造の選び方が数の大きさを決める．
+本稿では，評価構造そのものを大きな基数で選ぶ．
+構成可能宇宙 $L$ における最小の Mahlo 基数 $\kappa$ をとり，$\M=(V_{\kappa+1})^L$ を評価構造に固定する．
+
+比較の相手は巨大数庭園数（Large Number Garden Number，以下 $\LNGN$）\cite{lngn} である．
+$\LNGN$ は，順序数 $\alpha$ ごとの宇宙 $U(\alpha)$ の列と Henkin 型の選択関数 $\Theta$ をもつ理論 $T$ を立て，各 $U(\mathrm{CNF}(i))$ での定義可能性から関数 $f$ を定め，$f^{10}(10\uparrow^{10}10)$ とする．
+
+\subsection{主結果}
+本稿の結果は次の三つである．
+
+\begin{enumerate}[label=(\arabic*)]
+\item \textbf{定義．}（第 \ref{sec:prelim}・\ref{sec:def} 節）$V$ に Mahlo 基数が存在するという前提の下で，$\M$ と関数 $F$ は $L$ の中で一意に定まり，$F$ は全域かつ広義単調増加で，$y\ge 10^{100}$ なら $F(y)>y$ である．よって
+\[ N = F^{F(10^{100})}(10^{100}) \]
+は自然数として確定する（月絶天葬数，$N_{\mathrm{Moon}}=N$）．
+\item \textbf{条件つきの支配．}（第 \ref{sec:lngn}〜\ref{sec:proofG} 節）$\LNGN$ を $L$ で評価し，修復した理論 $\T$ の候補解釈 $I$ を固定するとき，
+\[ \LNGN_I < F(10^{100}) < N. \]
+これは，$\LNGN_I$ を名指す長さ $19{,}229{,}718{,}256<10^{100}$ の式 $\varphi$ を構成し，定理 G（$\M\models\exists!x\,\varphi(x)$ かつ $\M\models\varphi[\LNGN_I]$）を示すことによる．
+\item \textbf{新規性の補強．}（第 \ref{sec:novel} 節）$\Sth\vdash\Con(\T)$ であり，$\Sth$ が無矛盾なら $\T\nvdash\Con(\Sth)$．また，$\M$ の中で短く名指せる $\lambda'<\kappa$ について，$V_{\lambda'+1}$ に対する $F$ の類似物 $F_{\lambda'}$ は，$k\ge 2(|\psi_{\lambda'}|+32{,}574{,}917)$ で $F_{\lambda'}(k)<F(k)$ を満たす．
+\end{enumerate}
+
+(2) は「比較の前提」（$\LNGN$ も $L$ で評価すること，解釈 $I$ を固定すること）の下での主張である．
+$\LNGN$ は解釈ごとに値が変わり，許される解釈全体では値が上に有界でない（命題 \ref{prop:unbounded}）．
+本稿は，$U(\alpha)$ を $\kappa$ より上に置く解釈や，解釈全体の上限については何も主張しない．
+
+\subsection{証明の性格}
+定理 G の証明は，次の二つを結合したものである．Lean による完全な形式化ではない．
+\begin{itemize}
+\item \textbf{Lean 4 による部分形式化．}生成した式 $\varphi$ の 117 個の部品が，集合の言葉で書いた意図した条件を正しく書き写していること．その条件の意味（Tarski の充足，定義可能性，$L_\lambda$ と $<_\lambda$，$\Theta$ の Henkin 公理）．$\M$ の中で $\varphi$ を満たす元が高々一つであること（一意性．仮定はモデルの公理だけ）．
+\item \textbf{$\ZFC$ における紙の証明．}意図した証人（計算表・段階の表・構造の表）が $V_\kappa$ に属し，$\M$ の中で条件を満たすこと（存在）．階数の評価と，構造の再帰が循環しないことを含む．
+\end{itemize}
+Lean の定理は $L$ の中の $\ZFC$ の定理として読む（\S\ref{sec:readL}）．この読み替えはメタな議論で，機械では検査していない．
+本稿では証明の一部を概略に圧縮した．詳細は審議用文書 \cite{doc} にあり，Lean のファイルと検査の記録はリポジトリ \cite{repo} にある．Lean のファイルは，本稿とは独立の環境（GitHub Actions）でも再コンパイルされた．$\varphi$ の全文（$57{,}684{,}403{,}816$ バイト）も，生成プログラムとは独立に書いた構文検査器で検査した（第 \ref{sec:verify} 節）．
+
+\subsection{構成}
+第 \ref{sec:prelim} 節で評価モデルを固定し，第 \ref{sec:def} 節で $F$ と $N$ を定義する．
+第 \ref{sec:lngn} 節で $\LNGN$ を定式化し，第 \ref{sec:main} 節で主定理を述べる．
+第 \ref{sec:proofG} 節で定理 G を証明し，第 \ref{sec:verify} 節で機械検証をまとめる．
+第 \ref{sec:novel} 節は新規性の補強，第 \ref{sec:discussion} 節は比較の前提と未確定の点の議論である．

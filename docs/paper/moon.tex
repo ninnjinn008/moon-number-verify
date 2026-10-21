@@ -1,0 +1,84 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+\usepackage[noto-otf]{luatexja-preset}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable,enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage[margin=25mm]{geometry}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{convention}[theorem]{規約}
+\renewcommand{\proofname}{証明}
+
+\newcommand{\Lq}{\ulcorner\mathcal{L}\urcorner}
+\newcommand{\cq}[1]{\ulcorner #1\urcorner}
+\newcommand{\Lang}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\LNGN}{\mathrm{LNGN}}
+\newcommand{\Con}{\mathrm{Con}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\CNF}{\mathrm{CNF}}
+\newcommand{\Def}{\mathrm{Def}}
+\newcommand{\Num}{\mathrm{Num}}
+\newcommand{\Bg}{\mathrm{Big}}
+\newcommand{\ZFC}{\mathsf{ZFC}}
+\newcommand{\ZF}{\mathsf{ZF}}
+\newcommand{\PA}{\mathsf{PA}}
+\newcommand{\Sth}{\mathsf{S}}
+\newcommand{\T}{T'_{\LNGN}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\file}[1]{\texttt{#1}}
+
+\title{月絶天葬数\\[0.5em]{\large Mahlo 基数で選んだ評価構造上の Rayo 型関数と，巨大数庭園数との比較}}
+\author{葵}
+\date{2026 年 10 月（審議用文書 改訂 68 にもとづく）}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+構成可能宇宙 $L$ における最小の Mahlo 基数 $\kappa$ を用い，評価構造 $\M=(V_{\kappa+1})^L$ 上の純粋な $\{\in,=\}$ 一階式による一意定義可能性から Rayo 型の関数 $F$ を定め，自然数 $N=F^{F(10^{100})}(10^{100})$（月絶天葬数）を定義する．
+定義に追加の記号・パラメータ・選択関数は用いない．
+次に，巨大数庭園数（LNGN）を同じ宇宙 $L$ で評価し，その Henkin 公理を自由変数について修復した理論 $\T$ と，各宇宙 $U(\alpha)$ を $\alpha$ 番目の到達不能基数の段に置く候補解釈 $I$ を定める．
+$I$ の下での値 $\LNGN_I$ を名指す長さ $19{,}229{,}718{,}256$ の式 $\varphi$ を具体的に構成し，$\M\models\exists!x\,\varphi(x)$ かつ $\M\models\varphi[\LNGN_I]$（定理 G）を示すことで，$\LNGN_I<F(10^{100})<N$ を得る．
+定理 G の証明は，Lean 4 による部分形式化（式の書き写し・意味・一意性）と，$\ZFC$ における集合論的な存在証明（階数の評価と再帰の非循環性）を結合したものである．
+あわせて，$\Sth=\ZFC+V{=}L+\text{「Mahlo 基数が存在する」}$ が $\Con(\T)$ を証明すること，および $V_{\lambda'+1}$ に対する $F$ の類似物を $F$ が具体的なしきい値から先で上回ることを示す．
+\end{abstract}
+
+\tableofcontents
+
+\input{sec1}
+\input{sec2}
+\input{sec3}
+\input{sec4}
+\input{sec5}
+\input{sec6}
+\input{sec7}
+\input{sec8}
+\input{sec9}
+\appendix
+\input{appA}
+
+\section*{謝辞}
+本稿の論証は，別の AI による複数回の独立の審査を受けて改められた．順序対の判定式の偽陽性（改訂 29），Henkin 公理の読みによる矛盾，$U2$ の実装の誤り（改訂 31），閉包条件の扱い，階数評価の誤り（改訂 55），証明書の一意性の誤った主張（改訂 65）などは，その審査の指摘による．
+
+\begin{thebibliography}{9}
+\bibitem{rayo} A.~Rayo, \emph{Big Number Duel}, Massachusetts Institute of Technology, 2007.
+\bibitem{lngn} 巨大数庭園数（Large Number Garden Number）の原文（ブログ記事「理論」「埋め込み」「巨大関数」の各節）および Googology Wiki の解説記事．\emph{（審議では原文の URL と参照した版を明記する．）}
+\bibitem{okkuu} Okkuu，「巨大数庭園数の T と MK+ の矛盾について」（ブログ記事）．
+\bibitem{jech} T.~Jech, \emph{Set Theory}, The Third Millennium Edition, Springer, 2003.
+\bibitem{kanamori} A.~Kanamori, \emph{The Higher Infinite}, 2nd ed., Springer, 2003.
+\bibitem{kunen} K.~Kunen, \emph{Set Theory}, College Publications, 2011.
+\bibitem{lean} L.~de Moura and S.~Ullrich, The Lean 4 theorem prover and programming language, in: \emph{CADE-28}, LNCS 12699, Springer, 2021, pp.~625--635.
+\bibitem{repo} 本稿の検証用リポジトリ，\url{https://github.com/ninnjinn008/moon-number-verify}．Lean のファイル・生成プログラム・検査器と CI の記録を含む（検証したコミットは 9dd73d5）．
+\bibitem{doc} 葵，「巨大数庭園数に対抗する数 N の定義（審議用・改訂 68）」，\cite{repo} の \file{docs/} に収録．本稿で圧縮した証明（とくに定理 G の部品ごとの補題，存在の照合，Lean の定理の前提の照合）の詳細を含む．
+\end{thebibliography}
+
+\end{document}

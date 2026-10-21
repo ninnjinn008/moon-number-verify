@@ -1,0 +1,187 @@
+\section{定理 G の証明}\label{sec:proofG}
+
+以下はすべて $L$ の中の議論である．$H=V_\kappa$ と書く．
+
+\subsection{$\M$ の性質と三つの原理}
+\begin{enumerate}[label=(F\arabic*)]
+\item $\M$ は推移的で $V_\kappa\subseteq\M$．$L$ に属する $V_\kappa$ の部分集合はすべて $\M$ に属する．
+\item $L$ の中で $\lambda$ が到達不能なら $V_\lambda=L_\lambda$（$V{=}L$ の下で $H_\mu=L_\mu$，\cite[13 章]{jech}）．
+\item $\M\subseteq V_{\kappa+1}$ なので，$\M$ の元の元はすべて $V_\kappa$ に属する．
+\end{enumerate}
+
+\paragraph{原理 A（$\Delta_0$ の絶対性）．}量化子がすべて有界な式は，推移的な $\M$ と $L$ の間で絶対的である．
+順序対の判定 $\mathrm{pair}(p,a,b)$ は，「$p$ のどの元も $\{a\}$ か $\{a,b\}$ で，両方が $p$ に属する」という $\Delta_0$ の形で書く．\footnote{「$\forall s\,(s\in p\leftrightarrow s=\{a\}\vee s=\{a,b\})$」という有界でない形は，$a$ または $b$ の階数が $\kappa$ のとき偽陽性を生じる（たとえば $p=\emptyset$）．この点は審査で指摘され，改訂 29 で $\Delta_0$ 版に改めた．}
+
+\paragraph{原理 B（有界でない量化子）．}部品の中の有界でない量化子は，次のどれかの形をしている．
+(B0) 値を一意に固定する存在量化（$\emptyset$，数詞，後者，$\omega$）．
+(B1) ガードつき全称量化で，ガードが「$W\in V_\kappa$」を含意するもの（割当て，有限関数，記号の 4 つ組，自然数，$\beta$ から $\lambda\le\kappa$ への関数）．
+(B2) 同値型の全称量化 $\forall W\,(A(W)\leftrightarrow B(W))$ で，両辺が「$W\in V_\kappa$」を含意するもの．
+(B3) 表や証人の存在量化．
+(B0)〜(B2) では，量化子が $\M$ を動いても $L$ を動いても真偽は同じである．(B3) は原理 C で扱う．
+
+\paragraph{原理 C（表の一意性と存在）．}部品が「条件 $\Psi(T,\vec a)$ を満たす表 $T$ が存在し，その値が\ldots」という形のとき，次の二つを示せば，$\M$ での真偽は意図した関係と一致する．
+\begin{itemize}
+\item \emph{一意性}：$\Psi$ を満たす $T\in\M$（階数 $\kappa$ の元を含む）の値は，意図した値に限る．
+\item \emph{存在}：意図した表 $T^*$ が $V_\kappa$ に属し，$\M$ で $\Psi$ を満たす．
+\end{itemize}
+
+\subsection{部品の意味}
+各部品の条件が意図した関係を表すことは，部品ごとの補題 G1〜G16 による（表 \ref{tab:lemmas}）．
+これらの「条件 $\Leftrightarrow$ 意図した意味」の両方向は，ほぼすべて Lean で示した（第 \ref{sec:verify} 節）．
+
+\begin{table}[htbp]
+\centering\small
+\caption{部品ごとの補題}\label{tab:lemmas}
+\begin{tabular}{lp{0.55\textwidth}l}
+\toprule
+補題 & 内容 & 主な Lean の定理\\
+\midrule
+G1 & 空集合・後者・数詞・順序対・自然数・順序数の判定は，$\M$ の元について意図した関係 & \code{Export}\\
+G2 & ハイパー演算・算術・素数・Encode の表 & \code{hyper\_iff} ほか\\
+G3, G4 & 構文（Formula・Formula$_-$・MetaCode），一意読み & \code{formula\_iff}\\
+G5 & 充足関係 $\Leftrightarrow$ Tarski の充足 & \code{sat\_iff}\\
+G6 & IsDefinition・Definable（全称閉包，代入補題） & \code{definableIn\_iff}\\
+G7 & CNF の大小の表 $\Leftrightarrow$ $\CNF(k)<\CNF(i)$ & \code{cnf\_cmp\_correct\_py}\\
+G8〜G10 & 順序数，到達不能性，$O(i)=\CNF(i)$，$\lambda_\beta$ & \code{ordOf\_unique} ほか\\
+G11 & $\mathrm{vstage}(\lambda,D)\Leftrightarrow D=V_\lambda$ & \code{vstage\_unique}\\
+G12 & 構造の $\Theta$ 以外の成分 & \code{rep5\_struct}\\
+G13 & $\mathrm{defines}$，$L_\lambda$ と $<_\lambda$ & \code{defines\_iff}，\code{lorder\_wo}\\
+G14 & $\Theta$ は最小の good な元で Henkin 公理を満たす & \code{leastGood\_iff}\\
+G15 & 構造 $U(\CNF(i))$ & \code{structFull\_unique}\\
+G16 & $f$ と反復 & \code{fval\_unique}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{一意性（Lean）}\label{sec:uniq}
+\begin{theorem}[\code{full\_lngn\_unique'}，\file{TrUq4.lean}]\label{thm:uniq}
+外延性・整礎性・自然数の数詞をもつ型 $\alpha$ 上の構造 $M$ が，閉包性 $\mathrm{Zax}$（$H$ の推移性・和・冪・分出・置換）と「$M$ の元の元は $H$ に属する」を満たすとする．Lean で組み立てた最終式 $\mathtt{full\_lngn}$ について，$M\models\mathtt{full\_lngn}(x)$ かつ $M\models\mathtt{full\_lngn}(x')$ なら $x=x'$．
+\end{theorem}
+証明は次の一意性の連鎖による．いずれも \code{sorry} を使わず，公理は Lean の標準の三つ（\code{propext}，\code{Classical.choice}，\code{Quot.sound}）だけである．
+\begin{itemize}
+\item $\omega$ の元はちょうど数詞である（\code{omega\_iff}）．
+\item 集合の計算表は G7 の表の条件を満たす．よって $\mathrm{cnf\_lt}(k,i)\Rightarrow\CNF(k)<\CNF(i)$ である（\code{cnfLt\_lt}）．
+\item $O$ の表は，名前の比較の整礎性による帰納法で一意である（\code{oOk\_unique}）．
+\item $\varepsilon_0$，到達不能基数の列 $L$，$V_\lambda$ の表は，それぞれ一意である（\code{eps0\_unique}，\code{lamOk\_unique}，\code{vstage\_unique}）．
+\item 構造：$\Theta$ 以外の関数記号の行は，下の段の表が一致すれば一致する（\code{fn\_agree}）．$\Theta$ の値は least\_good で決まる．Formula$_-$ の式は $\Theta$ を含まないので，式に現れる記号に限った構造の表現（\code{Rep5T}）を使うと，二つの $Fn$ の least\_good は同じ最小元になる（\code{theta\_agree}）．これを $\gamma$ に関する $\in$-帰納法と組み合わせて，\code{structRec\_unique} を得る．
+\item $f$：構造の表と定義可能な集合は一意であり，有限和の値は上界の取り方によらない（\code{finiteSum\_val}）．反復の表は一意である（\code{iterate10\_unique}）．
+\end{itemize}
+
+\code{theta\_agree} は，構造の再帰が循環しないことの一意性の側の確認になっている．
+$\Theta$ の値は，$Fn$ の $\Theta$ 以外の行だけで決まる．
+
+\paragraph{閉包条件．}\code{rep5\_struct} は，$Fn$ の値がすべて $D$ に属することを使って $Fn$ から構造を作る．
+このために必要な閉包条件（各段 $\gamma$ の $D$ は $\emptyset$ を含み，$x\in D\cap\gamma$ が順序数なら $SU(x)\in D$）も，Lean で証明した（\code{struct\_closed}）．
+証明の材料は次のとおりである．
+\begin{itemize}
+\item 到達不能基数 $\lambda$ では $\beta\in\lambda\Rightarrow\beta+1\in\lambda$ である（\code{inacc\_lim}．強極限性と Cantor の対角線論法による）．
+\item 極限の段 $V_\lambda$ は，数・順序対・有限列・記号の 4 つ組について閉じている（\code{vs\_*}）．
+\item 二つの $V$ の段階の表は，共通の定義域で一致する（\code{vtab\_agree}）．
+\item 以上を $\gamma$ に関する帰納法で組み合わせる．
+\end{itemize}
+
+\subsection{存在（紙の証明）}\label{sec:exist}
+以下は $L$ の中の $\ZFC$ の議論である．意図した証人が $V_\kappa$ に属し，$\M$ で条件を満たすことを示す．
+条件を $\M$ で読んでよいことは原理 A・B による．
+この節では Lean の一意性の定理は使わない．使う Lean の定理は「条件 $\Leftrightarrow$ 意図した意味」の同値だけで，その「$\Leftarrow$」の向きを使う．
+
+\paragraph{階数についての事実．}$\lambda$ が極限順序数なら次が成り立つ．
+(R1) $a,b\in V_\lambda$ なら $(a,b)\in V_\lambda$．また，$\rank((a,b))=\max(\rank a,\rank b)+2$．
+(R2) $V_\lambda$ の元の有限列は $V_\lambda$ に属する．
+(R3) $V_\lambda$ の部分集合は $V_{\lambda+1}$ に属する．
+(R4) 遺伝的有限な集合は $V_\omega$ に属する．
+
+\begin{table}[htbp]
+\centering\small
+\caption{証人と階数の評価（$\lambda^*=\sup_{\beta<\varepsilon_0}\lambda_\beta<\kappa$）}\label{tab:rank}
+\begin{tabular}{lp{0.43\textwidth}l}
+\toprule
+部品 & 証人 & 階数\\
+\midrule
+算術・ハイパー演算・CNF & 有限の計算表 & $<\omega$\\
+$O$，$\varepsilon_0$ & $\{(i,\CNF(i)):i\in\omega\}$，$\varepsilon_0$ & $\le\varepsilon_0+2$\\
+$L$ & $\{(\beta,\lambda_\beta):\beta<\varepsilon_0\}$ & $\le\lambda^*+2$\\
+$V_\lambda$ & $\{(\beta,V_\beta):\beta\le\lambda\}$ & $\le\lambda+3$\\
+$L_\lambda$，$<_\lambda$ & $\{(\beta,(L_\beta,<_\beta)):\beta\le\lambda\}$ & $\le\lambda+5$\\
+定義の表 $DT_\beta$ & $\{((n,\tau),y)\}$ & $<\max(\beta,\omega)+\omega$\\
+構造の表 & $SU^*=\{(\gamma,U(\gamma)):\gamma\le\alpha\}$ & $\le\lambda_\alpha+9$\\
+$f$ の表 & 構造の表，有限集合 $S$，和と反復の表 & $<\lambda^*+\omega$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+$\lambda^*<\kappa$ である．$\kappa$ は Mahlo なので到達不能基数は $\kappa$ の下で非有界で，$\kappa$ は正則で $\varepsilon_0<\kappa$ だからである．
+よって表 \ref{tab:rank} の証人はすべて $V_\kappa\subseteq\M$ に属する．
+$DT_\beta$ の階数は，式の番号が自然数全体を動くので，$\beta=0$ でも $\omega$ 以上になる（たとえば $(x\in x),\neg\neg(x\in x),\dots$ はどれも $L_0=\emptyset$ 上で $\emptyset$ を定義する）．
+
+\paragraph{構造の再帰と階数の同時帰納法．}
+$U(\gamma)$（$\gamma\le\alpha$）を $\gamma$ に関する超限再帰で定める．同時に，次の主張を帰納法で示す．
+\[ (\sharp_\gamma)\quad U(\gamma)=((D,E),(Cn,(Fn,Rel))),\ D=V_{\lambda_\gamma},\ \rank(U(\gamma))\le\lambda_\gamma+7. \]
+各段 $\gamma$ では，$U\restriction\gamma$ と，すべての $\beta<\gamma$ についての $(\sharp_\beta)$ を仮定して，次の順に定める．
+\begin{enumerate}
+\item $\lambda=\lambda_\gamma$．$\beta<\gamma$ なら $\lambda_\beta<\lambda_\gamma$ である．
+\item $D=V_\lambda$，$E=\in\restriction D$，$Cn=\{(c,\emptyset)\}$，$Rel=\emptyset$．
+\item $Fn_0$ を，$f$ の行 $((f,w),\emptyset)$ と $U$ の行 $((U,\langle x\rangle),v_x)$ からなるものとする．$v_x$ は，$x\in D$ が順序数で $x\in\gamma$ なら $U(x)$，そうでなければ $\emptyset$ である．$(\sharp_x)$ より $\rank(U(x))\le\lambda_x+7<\lambda_\gamma$ なので，$U(x)\in D$ となる．
+\item $W=<_\lambda$．
+\item 構造 $\mathfrak A^0=(D,\in,\emptyset,Fn_0,\Theta\equiv\emptyset,\emptyset)$ で，各 Formula$_-$ の式について good な元のうち $W$ で最小のものを $v_m$ とする．Formula$_-$ の式の番号でない $m$ では $v_m=\emptyset$ とする．
+\item $Fn=Fn_0\cup\{((\Theta,\langle m\rangle),v_m):m\in D\}$，$U(\gamma)=((D,E),(Cn,(Fn,Rel)))$．
+\end{enumerate}
+$(\sharp_\gamma)$ は次のように示せる．$E\subseteq V_\lambda$，$Cn\subseteq V_\omega$ である．$Fn$ の元 $((t,w),v)$ は $V_\lambda$ に属する（R1，R2，手順 3）．よって五つの成分は $V_{\lambda+1}$ に属し，組の階数は $\lambda+7$ 以下である．
+
+\paragraph{非循環性．}
+どの手順も，$U(\gamma)$ 自身や $U(\delta)$（$\delta\ge\gamma$）を参照しない．
+$\Theta$ の値（手順 5）は $Fn_0$ だけから作った構造で決まり，$Fn$ の $\Theta$ の行は参照しない．
+したがってこれは置換公理による通常の超限再帰で，$SU^*$ は集合として存在する．
+
+\paragraph{存在の照合．}
+意図した表が，生成した式の要求する条件を条項ごとに満たすことを確かめる．
+
+\emph{$l\_order(\lambda,D,<_\lambda)$}：証人は $T^*=\{(\beta,(L_\beta,<_\beta)):\beta\le\lambda\}$ である．$\beta=0$，後者，極限の三つの場合を確かめる．
+後者の段 $\beta=\beta_1+1$ では，定義の表 $DT^*=\{((n,\tau),y):\mathrm{def\_code}(n)\wedge\M\models\mathrm{defines}(n,\tau,L_{\beta_1},y)\}$ を証人にとる．
+\begin{itemize}
+\item def\_table の二条項は，$DT^*$ の取り方から直ちに従う．
+\item 「defines で定義される集合の全体 $=\Def(L_{\beta_1})$」は，$\beta_1>0$ なら \code{defines\_iff}（$X\neq\emptyset$ を仮定する）と補題 \ref{lem:P} による．$\beta_1=0$ なら補題 \ref{lem:Z} による．
+\item $<_{\beta}$ の三つの場合は，$<_L$ の定義そのものである．
+\end{itemize}
+$\lambda$ が到達不能なので，(F2) より $L_\lambda=V_\lambda=D$ である．
+
+\emph{$\mathrm{struct\_rec}(\alpha,SU^*)$}：各段の level の条項を確かめる．
+\begin{itemize}
+\item lam\_of，vstage，e\_restrict，cn\_ok，$Rel=\emptyset$ は，それぞれ G10，G11 の存在の部分と定義から従う．
+\item fn\_ok の五条項は，手順 3・5・6 から従う．$\Theta$ の部分は $\{(m,v_m)\}\subseteq D\times D$ による．関数性は，記号の種類が 4 つ組から一意に読めることによる．
+\item theta\_L は次のように確かめる．
+  \begin{itemize}
+  \item $(\sharp_\gamma)$ より \code{rep5\_struct} の前提が満たされ，$Fn$ は構造 $\mathrm{sModel}(D,Fn)$ を表す．
+  \item この構造と $\mathfrak A^0$ は，$\Theta$ 以外の記号の解釈が一致する．$\Theta$ を含まない式の充足は両者で一致するので，$v_m$ は least\_good を満たす（\code{leastGood\_iff} の「$\Leftarrow$」）．
+  \end{itemize}
+\end{itemize}
+\code{rep5\_struct} の前提を満たすため，e\_restrict・cn\_ok・$Rel$・fn\_ok を theta\_L より先に確かめる．fn\_ok は $v_m\in D$ しか使わないので，この順序に循環はない．
+
+\begin{lemma}[純粋な式の Def]\label{lem:P}
+$X$ が推移的なら，等号を含む一階式で定義される $X$ の部分集合の全体と，記号が変数・$\in$・論理記号・括弧だけの式（純粋な式）で定義されるものの全体は一致する．
+\end{lemma}
+\begin{proof}
+$u=v$ を $\forall z\,(z\in u\leftrightarrow z\in v)$ に置き換える．$X$ が推移的なら，$u,v\in X$ について外延性により同値である．束縛変数へのパラメータは充足に影響しない．
+\end{proof}
+
+\begin{lemma}[最初の段]\label{lem:Z}
+$X=\emptyset$ のとき，$\mathrm{defines}(n,\tau,\emptyset,y)$ は「$n$ が $x_0$ 以外の変数を含まない純粋な式の番号で，$\tau=\emptyset$，$y=\emptyset$」と同値である．とくに定義される集合の全体は $\{\emptyset\}=L_1$ である．
+\end{lemma}
+\begin{proof}
+条件を直接読む．割当て $\tau$ は空の定義域でしか存在しない．$y\subseteq\emptyset$ である．「$\forall z\in X$」は空虚に真である．$(x_0\in x_0)$ のような式は存在する．$<_1=\emptyset$ で，$\mathrm{new\_less}(\emptyset,\emptyset)$ は同じ定義どうしの比較なので偽である．
+\end{proof}
+
+\paragraph{Lean の定理の前提．}
+存在の側で使う Lean の定理（\code{hyper\_iff}，\code{defines\_iff}，\code{lorder\_wo}，\code{rep5\_struct}，\code{leastGood\_iff}，\code{definableIn\_iff}，G14 の \code{good\_exists}）の前提を，一つずつ照合した．前提は次の三種類である．
+\begin{itemize}
+\item モデルの公理：Zax と hM．$L$ の中で $\M$ が満たす．
+\item 集合が $H$ に属すること，推移性，空でないこと．
+\item $s$ が式 $\varphi$ を表すこと（記号列の対応）．これは $\mathrm{metacode}$ と $\mathrm{formula}$ の補題から得る．
+\end{itemize}
+いずれも上の照合の中で満たされる．満たせない前提は，$X=\emptyset$ の段（補題 \ref{lem:Z} で別に扱った）のほかにはなかった．
+$\mathrm{cnf\_lt}$ の表の存在は Lean になく，紙の議論による．G7.lean が計算する自然数の表を，遺伝的有限集合に写す．
+
+\subsection{定理 G の結論}
+$A=H(12,10,10)$ とし，反復の表 $G=\{(k,f^k(A)):k\le 10\}$ と，各 $f(n)$ の証人（構造の表，定義可能集合，和の表）をとる．
+これらは $V_\kappa$ に属し，$\M$ で $\varphi[\LNGN_I]$ の条件を満たす．
+定理 \ref{thm:uniq} と合わせて，$\M\models\exists!x\,\varphi(x)$ かつ $\M\models\varphi[\LNGN_I]$ である．\qed

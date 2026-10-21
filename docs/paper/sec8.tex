@@ -1,0 +1,62 @@
+\section{新規性の補強}\label{sec:novel}
+
+この節の結果は，比較の規則上の「相手の数に使われていない理論」の根拠である．数の大小の根拠ではない．大小の根拠は，定義可能性による直接の対角化（第 \ref{sec:main} 節）だけに置く．
+
+\subsection{原文の主張との関係}
+$\LNGN$ の原文は，基礎理論の公理を強めても弱めても最終的な巨大数の大きさは変わらない，と述べる．本稿はこれに同意する．
+本稿の新規性は，基礎理論に公理を足すことではない．Mahlo 基数 $\kappa$ によって，評価構造 $V_{\kappa+1}$ そのものを選ぶことにある．
+構造が大きくなると名指せる集合が増える．たとえば $\LNGN$ の候補解釈全体も名指せるようになる．これが定義力の増大の源である．
+
+\subsection{無矛盾性の強さ}
+\begin{theorem}\label{thm:con}
+$\Sth\vdash\Con(\T)$．さらに，$\Sth$ が無矛盾なら $\T\nvdash\Con(\Sth)$．
+\end{theorem}
+\begin{proof}
+以下は $\Sth$ の中の議論である．
+\begin{enumerate}[label=(\alph*)]
+\item \emph{$\lambda_0$ の存在．}$\kappa$ を Mahlo 基数とする．$\kappa$ 未満の到達不能基数の集合は定常で，その極限点の集合は閉非有界である．両者は交わり，交わりの元は 1-到達不能基数である．最小のものを $\lambda_0<\kappa$ とする．
+\item \emph{順序型．}$\lambda_0$ 未満の到達不能基数の集合は，正則な $\lambda_0$ で非有界である．よって順序型は $\lambda_0$ で，すべての $\alpha<\lambda_0$ について $\lambda_\alpha<\lambda_0$ となる．
+\item \emph{モデル．}命題 \ref{prop:model} の証明が $\kappa$ について使うのは，到達不能性と「すべての $\alpha<\kappa$ で $\lambda_\alpha<\kappa$」だけである．よって $\mathcal N=(V_{\lambda_0},\in,U_I)\models\T$ となる．
+\item \emph{絶対性．}$U1$ の「$U(\alpha)\models\overline{\ZFC}_{\Lq}'$」は，$\mathcal N$ の内部の充足関係で読まれる．$V_{\lambda_0}$ は推移的で $\omega$ を含む $\ZFC$ のモデルなので，集合の構造の充足関係は $V_{\lambda_0}$ と外側の宇宙の間で絶対的である．
+\item \emph{一様性．}$\mathrm{Ax}_{\T}(n)$ を，$\T$ の公理の番号を表す $\Delta_1$ 式とする．示すべきことは
+\[ \Sth\vdash\forall n\,(\mathrm{Ax}_{\T}(n)\to\forall s\,\mathrm{Sat}(\mathcal N,n,s)) \]
+である．
+\begin{itemize}
+\item 個々の公理は，一つずつ示す．
+\item 分出・置換の図式の例は，式の番号 $k$ を変数とする一つの式 $\mathrm{Sat}(\mathcal N,k,\cdot)$ に，$\Sth$ の図式を適用して一様に示す．
+\item $U1$ は，(d) により「すべての $\alpha<\lambda_0$ と $\overline{\ZFC}_{\Lq}'$ の公理のすべての番号 $m$」についての主張に直して，同様に示す．
+\end{itemize}
+$\Sth$ の中で健全性定理を適用すると，$\Sth\vdash\Con(\T)$ を得る．
+\item \emph{証明可能性．}$\T\vdash\Con(\Sth)$ とすると，$\PA\vdash\Con(\T)\to\Con(\Sth)$ である．理由は次のとおり．$\neg\Con(\Sth)$ は $\Sigma_1$ 文である．形式化した $\Sigma_1$ 完全性により $\PA\vdash\neg\Con(\Sth)\to\mathrm{Prov}_{\T}(\ulcorner\neg\Con(\Sth)\urcorner)$ となる．これと $\PA\vdash\mathrm{Prov}_{\T}(\ulcorner\Con(\Sth)\urcorner)$ を合わせればよい．
+\item \emph{結論．}$\Sth$ は $\PA$ を（$\omega$ を通じた標準的な解釈で）証明する．よって $\Sth\vdash\Con(\T)\to\Con(\Sth)$ で，(e) と合わせて $\Sth\vdash\Con(\Sth)$ となる．これは第二不完全性定理に反する．この議論は $\T$ の無矛盾性を仮定しない．
+\end{enumerate}
+\end{proof}
+
+\subsection{基準点に対する $F$ の類似物}
+$\M$ の中で式 $\psi_{\lambda'}(\lambda)$ により一意に定まる $\lambda'<\kappa$ について，$F_{\lambda'}$ を $F$ の定義で $\M$ を $V_{\lambda'+1}$ に替えたものとする．
+
+\begin{theorem}\label{thm:fsub}
+$c_{\lambda'}=|\psi_{\lambda'}|+32{,}574{,}917$ とおく．$|\psi_{\lambda'}|$ は自由変数を $x''$ として数える．このとき，すべての $k\ge 1$ について
+\[ F_{\lambda'}(k) < F(c_{\lambda'}+|\Num_k|),\qquad |\Num_k|\le 145+22{,}724\,(B-1) \]
+が成り立つ．ここで $B$ は $k$ の二進の桁数である．とくに $k\ge 2(|\psi_{\lambda'}|+32{,}574{,}917)$ なら $F_{\lambda'}(k)<F(k)$．
+\end{theorem}
+\begin{proof}
+「$W=V_{\lambda+1}$ について $x=F_W(k)$」を表す $\M$ の式 $G(\lambda,k,x)$ を構成した（\file{fsub.py}）．部品は次のとおりである．
+\begin{itemize}
+\item 第 3 節の文法の構文解析の証明書．
+\item 変数の番号の表と自由変数の表．
+\item $W$ 上の割当てについての充足の表．
+\end{itemize}
+証明書は一般には一意でない．根の構文解析に使わない真の項目を，余分に入れてよいからである．それでも次の三つが成り立つ．
+\begin{itemize}
+\item 証明書の項目はすべて真である．
+\item 根の構文解析に現れる区間は，証明書に入っている．
+\item 一意読みにより，自由変数と充足の表の値は，証明書の式の項目で真の値と一致する．
+\end{itemize}
+よって根の式についての判定は，表の取り方によらない．
+$|G|=32{,}574{,}899$ である．$\Phi(x)\equiv\exists k\,(\Num_k(k)\wedge\exists\lambda\,(\psi_{\lambda'}(\lambda)\wedge G(\lambda,k,x)))$ のつなぎの記号は 17 個なので，$|\Phi|=|\Num_k|+|\psi_{\lambda'}|+32{,}574{,}916$ である．
+$\M\models\exists!x\,\Phi(x)$ かつ $\M\models\Phi[F_{\lambda'}(k)]$ なので，$F_{\lambda'}(k)\in D_{|\Phi|+1}$ となる．
+$\Num_k$ は Horner 法で組み立てる．一段は 21{,}625〜22{,}724 記号である．
+$k\ge 2^{25}$ なら $145+22{,}724\log_2 k\le k/2$ なので，$k\ge 2c_{\lambda'}\,(\ge 2^{25})$ で $c_{\lambda'}+|\Num_k|\le k$ となる．$F$ は単調なので結論を得る．
+\end{proof}
+$G$ の正しさは，上の帰納法による紙の議論と有限の検証（\file{test\_fsub.py}，五つの層で 2{,}803 件）によるもので，Lean では検査していない．

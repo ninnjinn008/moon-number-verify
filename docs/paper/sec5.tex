@@ -1,0 +1,60 @@
+\section{主定理}\label{sec:main}
+
+\subsection{一般形}
+\begin{proposition}[条件つき支配]\label{prop:B}
+$\LNGN$ を $L$ で評価する．解釈 $I$ の初期部分 $I\restriction\varepsilon_0$ が $\M$ の中でパラメータなしに $\ell$ 記号の式で一意に定義できるとする．
+$C$ を，$f$ と $f^{10}(10\uparrow^{10}10)$ の形式化，および $I\restriction\varepsilon_0$ の定義式との結合の費用を含めた定数とし，形式化で使う変数番号はすべて $C$ 未満とする．
+$(\ell+1)(C+1)<10^{100}$ なら $\LNGN_I<F(10^{100})<N$．
+\end{proposition}
+\begin{proof}
+$I\restriction\varepsilon_0$ の各成分は $V_\kappa$ に属し，その充足関係は $\M$ の中で定義できる．$I\restriction\varepsilon_0$ の定義式に $f$ の形式化を合成すれば，$\LNGN_I$ は $\M$ で一意に定まる．
+合成の際，変数番号を $d\le C$ だけずらすと，長さは高々 $\ell(1+d)$ になる．したがって合成した式の長さは $\ell(C+1)+C<k=(\ell+1)(C+1)$ である．
+$F$ は単調なので，$F(10^{100})\ge F(k)>\LNGN_I$ である．後半は第 \ref{sec:def} 節による．
+\end{proof}
+
+\subsection{式 $\varphi$ の具体的な構成}
+本稿は，命題 \ref{prop:B} の $\ell$ と $C$ を経由せず，候補解釈 $I$ の下で $\LNGN_I$ を定める $\Lang$-式 $\varphi(x)$ そのものを構成した．
+$\varphi$ は部品の合成で，部品はそれぞれ「条件を満たす有限な計算表・段階の表・構造の表が存在し，その値が\ldots」という形の式である．
+主な部品と記号数を表 \ref{tab:parts} に示す．
+
+\begin{table}[htbp]
+\centering\small
+\caption{$\varphi$ の主な部品と記号数}\label{tab:parts}
+\begin{tabular}{p{0.27\textwidth}p{0.40\textwidth}r}
+\toprule
+部品 & 内容 & 記号数\\
+\midrule
+数詞 $A$ & $x=10\uparrow^{10}10=H(12,10,10)$（ハイパー演算の表） & 17{,}915\\
+算術 & 加法・乗法・冪・素数・$n$ 番目の素数 & 例：乗法 23{,}461\\
+Encode & $\mathrm{Encode}(a)=-1+2^h\prod p_{i+1}^{a_i}$ & 1{,}255{,}145\\
+構文 & Formula・Formula$_-$（構文解析の証明書） & 10{,}119{,}792\\
+充足関係 & 一般の $\Lq$ 構造での Tarski の充足 & 86{,}031{,}229\\
+IsDefinition・Definable & 全称閉包・原文の代入規則 & 783{,}308{,}393\\
+CNF の大小 & 名前どうしの比較の計算表 & 6{,}107{,}808\\
+O と L & $O(i)=\CNF(i)$，$\lambda_\beta$ & 25{,}726{,}353 / 31{,}306{,}190\\
+$V_\lambda$ & 冪集合と和集合の段階の表 & 19{,}550\\
+$L_\lambda$ と $<_\lambda$ & 定義の表と段階の表 & 2{,}231{,}892{,}867\\
+$\Theta$ & least\_good と theta\_L & 671{,}422{,}147\\
+構造 $U(\CNF(i))$ & 構造の再帰表（struct\_full） & 7{,}594{,}788{,}010\\
+$f$ & 構造の表・定義可能集合・有限和 & 19{,}104{,}908{,}587\\
+\midrule
+$\varphi$ 全体 & $f^{10}(A)$ & \textbf{19{,}229{,}718{,}256}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+$\varphi$ は第 3 節の文法の $\Lang$-式で，自由変数は $x$ だけである．
+記号のほとんど（99.98\%）は変数のプライムである．生成プログラムが束縛変数に毎回新しい番号を割り当てるので，変数名が長くなる．
+
+\subsection{主定理}
+\begin{theorem}[定理 G]\label{thm:G}
+$\M\models\exists!x\,\varphi(x)$ かつ $\M\models\varphi[\LNGN_I]$．
+\end{theorem}
+
+\begin{corollary}[主定理]\label{cor:main}
+$\LNGN$ を $L$ で評価し，候補解釈 $I$（定義 \ref{def:I}，規約 \ref{conv:reading}）を固定するとき，
+\[ \LNGN_I < F(10^{100}) < N. \]
+\end{corollary}
+\begin{proof}
+$|\varphi|<10^{100}$ と定理 G より $\LNGN_I\in D_{10^{100}}$，よって $\LNGN_I<F(10^{100})$．後半は第 \ref{sec:def} 節による．
+\end{proof}

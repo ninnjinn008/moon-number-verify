@@ -1,0 +1,32 @@
+\section{議論}\label{sec:discussion}
+
+\subsection{比較の前提}
+主定理（系 \ref{cor:main}）による比較は，次の二つが認められて初めて成り立つ．
+\begin{enumerate}
+\item \textbf{共通の評価宇宙．}$\LNGN$ も $L$ で評価する．$V\neq L$ のとき，$V$ で評価した $\LNGN$ は $L$ の外の集合を使いうるので，$\M$ の中では名指せない．
+\item \textbf{解釈の固定．}$\LNGN$ の値を候補解釈 $I$ の下の値 $\LNGN_I$ に固定する．固定するものは次のとおりである．
+  \begin{itemize}
+  \item Henkin 公理の読み（規約 \ref{conv:reading}）．
+  \item $U(\alpha)$ を $\alpha$ 番目の到達不能基数の段に置くこと．
+  \item $\Theta$ と追加記号の解釈．
+  \item 構造の符号（五つ組）．
+  \end{itemize}
+\end{enumerate}
+公理 $U3$ は $|U(\alpha)|=V_\beta$ となる $\beta$ の存在しか要求しない．したがって，$U(\alpha)$ を $\kappa$ より上に置く解釈も許される．そのような解釈と，解釈全体の上限（命題 \ref{prop:unbounded} により有界でない）については，本稿は何も主張しない．
+
+\subsection{原文の読みで確定していない点}
+\begin{enumerate}
+\item Henkin 公理を，$x_i$ 以外の自由変数をもつ式にどう適用するか（命題 \ref{prop:henkin}）．
+\item 記号の符号化：4 つ組の長さ，等号の展開，関数・関係記号の適用の書き方（\ref{app:code}）．
+\item $\mathrm{IsDefinition}(P)$ で，$P$ が $\cq{x_1}$ を自由にもつときに外側の $\forall\cq{x_1}$ が捕獲すること．$f$ の well-definedness には影響しないが，値には影響しうる．本稿は原文の代入規則どおりに実装した．
+\end{enumerate}
+なお，Okkuu の議論 \cite{okkuu} は $\Theta$ を含む式に Henkin 公理を適用している．現行の原文（対象は Formula$_-$）のままでは成立しない．命題 \ref{prop:henkin} の反例は $\Theta$ を含まないので，それとは独立である．
+
+\subsection{前提の強さと $V{=}L$ の役割}
+本稿の前提（$V$ に Mahlo 基数が存在する）は，無矛盾性の強さで $\LNGN$ の前提より真に強い（定理 \ref{thm:con}）．前提が強い分，成り立たない可能性も相対的に大きいことは認める．
+$V{=}L$ は，評価モデルを $L$ に固定することと，$\Theta$ を $<_L$ で正準に定めることに使う．
+評価モデルを固定しても，$\Con(\Sth)$ のような命題の独立性が解消されるわけではない．$N$ の値が一意なのは，「$L$ で評価する」という取り決めの下においてである．
+
+\subsection{残る検査}
+定理 G の証明のうち，存在の側（\S\ref{sec:exist}）と，Lean を $L$ で読むこと（\S\ref{sec:readL}）は，独立の読み手による検査を待つ．
+機械で検査できる部分は，独立の環境での再コンパイルと全文の構文検査まで済んでいる．

@@ -1,0 +1,46 @@
+\section{$\Lq$ の記号と文法}\label{app:code}
+原文は記号を $\omega^4$ 未満の順序数 $\omega^3a_3+\omega^2a_2+\omega a_1+a_0$ で符号化し，本稿はこれを 4 つ組 $(a_0,a_1,a_2,a_3)$ として扱う．
+\begin{center}\small
+\begin{tabular}{ll}
+\toprule
+記号 & 4 つ組\\
+\midrule
+$\bot,\to,\neg,\exists,(,)$ & $(0..5,0,0,0)$\\
+$\cq{c_i}$ & $(6,0,i,0)$\\
+$\cq{x_i}$ & $(7,1,i,0)$\\
+$\cq{U}$，$\cq{\Theta}$ & $(8,2,0,1)$，$(8,3,0,1)$\\
+$\cq{f_{a,i}}$ & $(8,4,i,a)$\\
+$\cq{\in}$，$\cq{r_{a,i}}$ & $(9,5,0,2)$，$(9,6,i,a)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+本稿は，原文の例 $(\cq{x_0}\cq{\in}\cq{x_1})$，$\cq{\Theta}\cq{(}\cq{x_0}\cq{)}$ に合わせて，文法を次のように読む．
+\[ t ::= x_i\mid c_i\mid F\,(\,t_1\cdots t_a\,),\qquad \varphi ::= \bot\mid(t_1\in t_2)\mid R\,(\,t_1\cdots t_a\,)\mid(\varphi\to\psi)\mid\neg\varphi\mid\exists x_i\,(\varphi). \]
+項は自己区切り的なので，コンマなしでも構文解析は一意である．
+4 つ組の長さは常に 4（末尾の 0 を省かない）と読む．
+
+\section{再現の手順}\label{app:repro}
+検証用のプログラムと Lean のファイルは，リポジトリ \cite{repo} にある．主なものは次のとおりである．
+\begin{center}\small
+\begin{tabular}{p{0.38\textwidth}p{0.55\textwidth}}
+\toprule
+ファイル & 内容\\
+\midrule
+\file{num\_formula.py} & $\Bg_j$ の生成と記号数\\
+\file{arith.py}，\file{parse.py}，\file{semantics.py}，\file{definable.py}，\file{cnf.py}，\file{ordinals.py}，\file{inacc\_seq.py}，\file{structure.py}，\file{lorder.py}，\file{ffunc.py} & $\varphi$ の部品の生成\\
+\file{test\_*.py} & 有限の宇宙での総当たり検証と変異テスト\\
+\file{final\_phi.py} & $|\varphi|$ と自由変数．\code{--stream} で全文を書き出す\\
+\file{lean/*.lean}，\file{lean/build\_ci.sh} & Lean の形式化と，全ファイルのコンパイル\\
+\file{tr\_hash\_check.py} & 最終式のハッシュ照合（一致なら終了コード 0）\\
+\file{phi\_syntax\_check.c} & 全文の独立な構文検査\\
+\file{fsub.py}，\file{test\_fsub.py} & 定理 \ref{thm:fsub} の式 $G$ と $\Num_k$\\
+\file{.github/workflows/verify.yml} & 独立の環境での自動検査\\
+\bottomrule
+\end{tabular}
+\end{center}
+主な手順は次のとおりである．
+\begin{itemize}
+\item Lean の再コンパイル：\code{bash lean/build\_ci.sh}（Lean 4.12.0，約 25〜40 分）．
+\item ハッシュ照合：\code{python3 tr\_hash\_check.py lngn}．
+\item 全文の構文検査：\code{mkfifo phi.fifo; ./phi\_syntax\_check < phi.fifo \& python3 final\_phi.py --stream phi.fifo}（約 7 分．ディスクは不要）．
+\end{itemize}
